@@ -1,0 +1,6 @@
+.env
+.db
+*.pyc
+node_modules
+webpack-stats.json
+assets/bundles/

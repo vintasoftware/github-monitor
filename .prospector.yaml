@@ -1,0 +1,35 @@
+output-format: text
+
+strictness: veryhigh
+test-warnings: true
+doc-warnings: false
+member-warnings: true
+
+uses:
+  - django
+  - celery
+
+pep8:
+  full: true
+  options:
+    max-line-length: 100
+
+pylint:
+  disable:
+    - invalid-name
+    - wrong-import-order
+  options:
+    max-line-length: 100
+
+dodgy:
+  run: true
+
+ignore-paths:
+  - node_modules
+  - venv
+  - env
+
+ignore-patterns:
+  - .+/migrations/.+
+  - .+/settings.py
+  - manage.py
