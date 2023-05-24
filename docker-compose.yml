@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: "postgres:12"
+    image: "postgres:latest"
     env_file: .env
     volumes:
       - .db:/var/lib/postgresql/data
@@ -19,8 +19,8 @@ services:
       - redis
 
   worker:
-    image: github-monitor_api:latest
-    command: celery worker --app=githubmonitor --loglevel=info
+    image: github-monitor-api
+    command: celery -A githubmonitor worker --loglevel=info
     volumes:
       - .:/app/
     env_file: .env
@@ -33,9 +33,11 @@ services:
       context: .
       dockerfile: Dockerfile-webpack
     command: npm run dev
+    environment:
+      - NODE_OPTIONS=--openssl-legacy-provider
     volumes:
       - .:/app/
       - /app/node_modules
 
   redis:
-    image: "redis:5-buster"
+    image: "redis:latest"

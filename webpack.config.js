@@ -12,12 +12,12 @@ module.exports = {
   },
 
   plugins: [
-    new BundleTracker({ filename: './webpack-stats.json' }),
+    new BundleTracker({ path: __dirname, filename: 'webpack-stats.json' }),
   ],
 
   module: {
     rules: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader'}
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' }
     ],
   },
 
