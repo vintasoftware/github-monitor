@@ -13,6 +13,7 @@ Then edit the file setting appropriate values for all the configs, preferably wi
 Remember to fill `DATABASE_URL` with the correct values provided in `POSTGRES_*` variables.
 
 You can generate the github keys for `SOCIAL_AUTH_*` at: https://github.com/settings/applications/new
+- When generating the keys, use `http://localhost:8000/oauth/complete/github/` as the callback URL
 
 For the execution of this project, you'll need docker and docker installed. Check the instructions for their installations in all operating systems:
 
@@ -26,6 +27,7 @@ After the installation of the above tools and with the right values in .env, you
 
 This will build and run all the required services for this application to run.
 If everything ran sucessfully, you should be able to visit the application at http://localhost:8000
+- Make sure that you're using `http://` and not `https://`, as the browser may sometimes add `https://` if you don't specify it
 
 To execute commands such as migrations, run:
 

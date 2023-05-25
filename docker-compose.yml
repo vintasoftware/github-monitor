@@ -19,7 +19,7 @@ services:
       - redis
 
   worker:
-    image: github-monitor-api
+    build: .
     command: celery -A githubmonitor worker --loglevel=info
     volumes:
       - .:/app/
