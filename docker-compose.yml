@@ -11,6 +11,7 @@ services:
     build: .
     ports:
       - "8000:8000"
+    restart: always
     volumes:
       - .:/app/
     env_file: .env
@@ -21,6 +22,7 @@ services:
   worker:
     build: .
     command: celery -A githubmonitor worker --loglevel=info
+    restart: always
     volumes:
       - .:/app/
     env_file: .env
@@ -33,6 +35,7 @@ services:
       context: .
       dockerfile: Dockerfile-webpack
     command: npm run dev
+    restart: always
     environment:
       - NODE_OPTIONS=--openssl-legacy-provider
     volumes:
