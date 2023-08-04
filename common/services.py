@@ -32,11 +32,20 @@ class GitHubService:
     def get_repository_commits(self, user, repository):
         page = 1
         all_commits = []
-        has_next = True
 
-        while has_next:
+        NOW = datetime.date.today()
+        THIRTY_DAYS_FROM_NOW = NOW - datetime.timedelta(30)
+
+        params = {
+            'since': THIRTY_DAYS_FROM_NOW.isoformat(),
+            'until': NOW.isoformat(),
+            'per_page': 10
+        }
+
+        while True:
             commits_response = requests.get(
-                f"{self.BASE_URL}/repos/{user}/{repository}/commits?page={page}", headers=self.get_request_headers(user))
+                f'{self.BASE_URL}/repos/{user}/{repository}/commits', headers=self.get_request_headers(user), params={**params, 'page': page})
+            print(commits_response.url)
             commits_response_data = json.loads(commits_response.text)
 
             if (len(commits_response_data)):

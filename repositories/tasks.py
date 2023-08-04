@@ -9,8 +9,8 @@ from common.services import GitHubService
 def capture_repository_commits_task(user, repository):
     repository_object = Repository.objects.get(name=repository)
     github_client = GitHubService()
+    # FIXME: this could be optimized as a bulk insert inside a db transaction, and probably should not be buffering a large commit list in memory
     commits = github_client.get_repository_commits(user, repository)
-    # FIXME: this could be optimized as a bulk insert inside a db transaction
     for commit_raw_data in commits:
         Commit(
             message=commit_raw_data['commit']['message'],

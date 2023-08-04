@@ -32,9 +32,7 @@ def repository_create_view(request):
     if Repository.objects.filter(name=repository).exists():
         return Response("Repository is already added to Github monitor", status=status.HTTP_409_CONFLICT)
 
-    # add background job to save repo commits here
-    # github_client.get_repository_commits(request.user, repository)
-    capture_repository_commits_task.delay(str(request.user), repository)
     serializer.save()
+    capture_repository_commits_task.delay(str(request.user), repository)
 
     return Response(serializer.data, status=status.HTTP_201_CREATED)
